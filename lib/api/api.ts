@@ -9,7 +9,7 @@ export type CampersListResponse = {
 axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_API_URL}/api`;
 interface CampersParams {
 	page: number;
-	perPage: number;
+	limit: number;
 	location?: string;
 	form?: string;
 	transmission?: "automatic" | "manual";
@@ -23,7 +23,7 @@ export const getCampers = async (params?: CampersParams) => {
 	const res = await axios.get<CampersListResponse>("/campers", {
 		params: {
 			page: params?.page ?? 1,
-			perPage: params?.perPage ?? 12,
+			limit: params?.limit ?? 4,
 
 			...(params?.location && { location: params.location }),
 			...(params?.form && { form: params.form }),

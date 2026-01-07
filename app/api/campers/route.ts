@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 		const transmission = searchParams.get("transmission") ?? "";
 
 		const page = Number(searchParams.get("page") ?? 1);
-		const perPage = Number(searchParams.get("perPage") ?? 4);
+		const limit = Number(searchParams.get("limit") ?? 4);
 
 		const AC = searchParams.get("AC") === "true";
 		const bathroom = searchParams.get("bathroom") === "true";
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
 		const { data } = await api("/campers", {
 			params: {
 				page,
-				perPage,
+				limit,
 
 				...(location && { location }),
 				...(form && { form }),
